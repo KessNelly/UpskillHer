@@ -4,8 +4,9 @@ const  {notFound, errorHandler} = require('./middlewares/errorHandler')
 
 const app = express();
 const dotenv = require("dotenv").config();
-const PORT = process.env.PORT 
+const PORT = process.env.PORT ||4200
 const authRouter = require ('./routes/authRoute');
+const userRoute=require('./routes/userRoute');
 
 const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
@@ -18,7 +19,7 @@ app.use(cookieParser());
 
 
 app.use('/api/user', authRouter);
-
+app.use('/api',userRoute);
 
 
 app.use(notFound)
