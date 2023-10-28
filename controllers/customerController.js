@@ -80,10 +80,5 @@ const orderProduct = async (req, res) => {
   }
 };
 
-
-
-
-
-
 module.exports = {searchProduct,orderProduct,getAllProducts };
   
