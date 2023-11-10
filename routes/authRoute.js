@@ -11,7 +11,7 @@ router.put('/password',authMiddleware, updatePassword);
 router.post('/login', loginFarmer);
 router.post('/customer-login', loginCustomer);
 router.post('/admin-login', loginAdmin);
-router.get('/all-users', getallUsers);
+router.get('/all-users', authMiddleware, isAdmin, getallUsers);
 
 router.get('/refresh', handleRefreshToken);
 router.get('/logout', logOut);
