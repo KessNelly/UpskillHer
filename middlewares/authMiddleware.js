@@ -33,5 +33,40 @@ const isAdmin = asyncHandler(async (req, res, next)=>{
     }
 });
 
+//produce authorization middleware
+// Authorization middleware
+const authenticate= async (req, res, next) => {
+    const produceId = req.params.id;
+    const farmerId = req.user.farmer;
+  
+    try {
+      const existingProduce = await Produce.findOne({ _id: produceId, farmer: farmerId });
+  
+      if (!existingProduce) {
+        return res.status(404).json({ error: 'Produce  not found or unauthorized' });
+      }
+      req.produce = existingProduce;
+      next();
+    } catch (error) {
+     // console.error(error);
+      res.status(500).json({ error: 'Error while validating' });
+    }
+  };
 
-module.exports = {authMiddleware , isAdmin}
+  
+// authenticationMiddleware.js
+const verifyToken = (req, res, next) => {
+  const token = req.headers.authorization;
+ if (!token) {
+    return res.status(401).json({ error: 'Unauthorized - No token provided' });
+  }
+
+  jwt.verify(token, 'yourSecretKey', (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ error: 'Unauthorized - Invalid token' });
+    }
+    req.user = decoded.userId;
+    next();
+  });
+};
+module.exports = {authMiddleware , isAdmin,verifyToken,authenticate}

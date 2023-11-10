@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-const produceSchema = new mongoose.Schema({
+const produceSchema = new Schema({
   cropName: {
     type: String,
     required: true,
@@ -17,17 +18,13 @@ const produceSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  // Add other fields as needed
-  harvestDate: {
-    type: Date,
-    required: true,
-  },
- 
   farmer: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'userModel', 
-    required: true,
+    type: Schema.Types.ObjectId,
+    ref: 'userModel', // Set this to the name of your 'Farmer' model if available
   },
+  // image: {
+  //   type: String, // Store the image URL or file path
+  // },
 }, {
   timestamps: true,
 });
