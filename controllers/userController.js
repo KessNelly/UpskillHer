@@ -15,7 +15,11 @@ const crypto = require("crypto");
 //Create a new user
 const createUser = asyncHandler(async (req,res)=>{
     //const email = req.body.email;
-    const {email, role} = req.body;
+   const { email, role } = req.body;
+   
+   if (!role || !email) {
+      throw new Error("All fields are required!")
+   }
     const findUser = await User.findOne({email: email, role: role});
     if(!findUser){
         const newUser = await User.create(req.body)
