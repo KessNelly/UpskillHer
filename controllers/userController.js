@@ -5,7 +5,7 @@ const {generateToken} = require("../config/jwtToken");
 const validateMongoDbId = require('../utils/validateMongodbid');
 const { generateRefreshToken } = require('../config/refreshToken');
 const jwt = require("jsonwebtoken");
-const sendEmail = require('./emailController')
+//const sendEmail = require('./emailController')
 const crypto = require("crypto");
 
 //to=do
@@ -286,7 +286,10 @@ const forgotPasswordToken = asyncHandler (async (req,res)=>{
             htm: resetURL,
          };
          sendEmail(data);
-         res.json(token);
+        // res.json(token);
+        res.json({
+         message : " proceed to your email for the reset link"
+        });
       }
       catch (error) {
          throw new Error (error);

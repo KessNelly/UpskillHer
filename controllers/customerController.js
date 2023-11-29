@@ -50,7 +50,7 @@ const searchProduct = async (req, res) => {
 
 
 const orderProduct = async (req, res) => {
-  const { cropName, quantity, deliveryAddress, customer } = req.body;
+  const { customer, deliveryAddress, Amount, status } = req.body;
 
   try {
     const produce = await Produce.findOne({ cropName });
@@ -65,10 +65,11 @@ const orderProduct = async (req, res) => {
 
     // Create a new order
     const order = new Order({
-      cropName,
-      quantity,
-      deliveryAddress,
       customer,
+      deliveryAddress,
+      Amount,
+      status
+      
     });
     await order.save();
     produce.quantity -= quantity;
