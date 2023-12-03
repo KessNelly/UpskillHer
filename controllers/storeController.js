@@ -23,18 +23,20 @@ const createStore = asyncHandler(async(req, res)=>{
                 
             }) ;
         }
-        newStore.storeName = storeName;
-        newStore.storeDescription = storeDescription;
-        newStore.storeUrl = storeUrl;
-        newStore.storeBanner = storeBanner;
-
-        await newStore.save()
+        
+       const store = new Store({
+        storeName, storeDescription, storeUrl, storeBanner
+       })
+       await store.save()
         res.json({
             msg: "Store set up successfully!!",
+            store
             
         });
     } catch (error) {
+        console.error (error)
         throw new Error (error);
+    
     }
 });
 

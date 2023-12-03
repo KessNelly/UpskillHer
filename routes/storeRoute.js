@@ -4,7 +4,7 @@ const { createStore, updateStore, getStore, getAllStores, deleteStore } = requir
 //const { uploadPhoto, blogImgResize  } = require("../middlewares/uploadimages");
 const router = express.Router();
 
-router.post("/", authMiddleware, isAdmin, createStore);
+router.post("/", authMiddleware, createStore);
 //router.put("/upload/:id", authMiddleware, isAdmin, uploadPhoto.array("images", 2), blogImgResize, uploadImages);
 router.put("/:id", authMiddleware, isAdmin, updateStore);
 router.get("/:id", getStore);

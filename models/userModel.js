@@ -25,7 +25,7 @@ var userSchema = new mongoose.Schema({
     },
     role:{
         type:String,
-        enum: ["farmer", "consumer"]
+        enum: ["farmer", "consumer", "admin"]
         // default: "farmer",
     },
     farmLocation:{
