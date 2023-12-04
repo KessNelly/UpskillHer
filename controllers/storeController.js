@@ -59,7 +59,9 @@ const getStore = asyncHandler(async(req, res)=>{
     const {id} = req.params;
     validateMongoDbId(id)
     try {
-         const getStore = await Store.findById(id)
+        // const getStore = await Store.findById(id)
+         const getStore = await Farmer.findById(id) //find store based on farmer's id
+
         res.json(getStore);
     } catch (error) {
         throw new Error (error);

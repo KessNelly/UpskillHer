@@ -4,6 +4,7 @@ const dbConnect = require ("./config/dbConnect");
 const  {notFound, errorHandler} = require('./middlewares/errorHandler')
 const session = require('express-session')
 const path = require('path');
+const cors = require("cors")
 
 const app = express();
 const dotenv = require("dotenv").config();
@@ -31,7 +32,7 @@ const cookieParser = require("cookie-parser");
 dbConnect();
 
 
-
+app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
